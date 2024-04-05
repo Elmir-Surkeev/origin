@@ -1,4 +1,4 @@
-package tasks;
+package personal_learn;
 
 //программа вычиляющая факториал числа
 public class task_1 {

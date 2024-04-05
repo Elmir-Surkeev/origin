@@ -1,3 +1,5 @@
+package personal_learn;
+
 public class ForExample {
     public static void main(String[] args) {
         for (int value = 1; value < 83; value++){
