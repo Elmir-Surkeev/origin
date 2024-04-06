@@ -1,6 +1,6 @@
-package personal_learn;
+package personal_learn.lessons;
 
-public class Main {
+public class _2_Task {
     public static void main(String[] args) {
         int value = 0;
         do {

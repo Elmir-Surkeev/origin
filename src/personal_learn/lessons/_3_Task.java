@@ -1,7 +1,7 @@
-package personal_learn;
+package personal_learn.lessons;
 
 //программа вычиляющая факториал числа
-public class task_1 {
+public class _3_Task {
     public static void main(String[] args) {
         int value = 5;
         int result = factoriall(value);

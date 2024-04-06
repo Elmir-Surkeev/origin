@@ -1,6 +1,6 @@
-package personal_learn;
+package personal_learn.lessons;
 
-public class ForExample {
+public class _1_Task {
     public static void main(String[] args) {
         for (int value = 1; value < 83; value++){
             if (value == 5){

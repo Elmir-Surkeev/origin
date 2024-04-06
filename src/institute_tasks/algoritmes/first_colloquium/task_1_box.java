@@ -6,13 +6,13 @@ public class task_1_box {
     public static double function(double x) {
         return Math.sin(x) - x + 2;
     }
+
     // Метод квадратичной аппроксимации для поиска корня
     public static double quadraticApproximation(double x0, double epsilon, int N) {
-        int i = 0;
         double x1 = x0;
         double x2 = x0 + epsilon; // Второе начальное приближение
 
-        while (i < N) {
+        for (int i = 0; i < N; i++) {
             double f0 = function(x0);
             double f1 = function(x1);
             double f2 = function(x2);
@@ -27,11 +27,10 @@ public class task_1_box {
             x0 = x1;
             x1 = x2;
             x2 = newX;
-
-            i++;
         }
         return Double.NaN; // Возвращаем NaN, если не удалось достичь точности за N итераций
     }
+
     public static void main(String[] args) {
         double x0 = 2.55;
         double epsilon = 1e-6;
@@ -47,4 +46,3 @@ public class task_1_box {
         }
     }
 }
-
