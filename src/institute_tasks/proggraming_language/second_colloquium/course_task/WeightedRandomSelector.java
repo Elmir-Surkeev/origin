@@ -9,6 +9,11 @@ public class WeightedRandomSelector {
 
     // Конструктор класса, принимает массив значений и массив весов значений
     public WeightedRandomSelector(int[] values, int[] weights) {
+        // Проверяем, что длина массивов значений и весов совпадает
+        if (values.length != weights.length) {
+            throw new IllegalArgumentException("Length of values and weights arrays must be the same");
+        }
+
         this.values = values;
         this.weights = weights;
         this.random = new Random();
