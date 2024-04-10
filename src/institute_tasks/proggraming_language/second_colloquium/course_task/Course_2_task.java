@@ -6,7 +6,7 @@ public class Course_2_task {
 //    Используйте для этого метод деления отрезка пополам (и рекурсию).
         // Функция, которую будем анализировать
         public static double function(double x) {
-            return Math.cos(Math.pow(x, 5)) + Math.pow(x, 4) - 345.3 * x - 23;
+            return Math.cos(Math.pow(x, 5)) + Math.pow(x, 4) - 345.5 * x - 23;
         }
         // Метод деления отрезка пополам для нахождения корня уравнения
         public static double bisectionMethod(double a, double b, double epsilon) {
