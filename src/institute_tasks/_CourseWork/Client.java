@@ -1,6 +1,6 @@
 package institute_tasks._CourseWork;
 
-public class CourseWork {
+public class Client {
         private String accommodationType;
         private String foodPreference;
         private String locationPreference;
