@@ -3,7 +3,6 @@ package institute_tasks.proggraming_language.third_colloquium;
 import java.util.ArrayList;
 import java.lang.Exception;
 import java.util.Scanner;
-
 class Shape {
     private double volume;
 
