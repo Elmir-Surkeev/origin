@@ -3,6 +3,8 @@ package institute_tasks.algoritmes.third_colloquium.first_lesson_tasks;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//Для списка А, состоящего из 20 элементов, вычислить количество
+//отрицательных элементов списка
 public class Task_2 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

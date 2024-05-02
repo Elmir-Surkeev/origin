@@ -5,6 +5,12 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+//Составить программу, которая считывает сначала количество
+//оценок, потом по очереди сами эти оценки, затем выводит их же в том же порядке
+//        (используем список). Найдите среднюю оценку за урок.
+
+
 public class Task_1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -17,6 +23,7 @@ public class Task_1 {
         ArrayList<Integer> grades = new ArrayList<>();
 
         // Считываем оценки
+
         System.out.println("Введите оценки:");
         for (int i = 0; i < numGrades; i++) {
             System.out.print("Оценка " + (i + 1) + ": ");
