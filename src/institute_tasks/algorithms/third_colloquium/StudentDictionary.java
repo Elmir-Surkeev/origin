@@ -1,6 +1,9 @@
 package institute_tasks.algorithms.third_colloquium;
 
+import java.io.*;
 import java.util.*;
+
+import static institute_tasks.algorithms.third_colloquium.AllProgramm.createTransliterationMap;
 
 public class StudentDictionary {
     private static final Map<String, Student> studentMap = new HashMap<>();
@@ -16,7 +19,10 @@ public class StudentDictionary {
             System.out.println("4. Перевести имя на русский");
             System.out.println("5. Перевести имя на латиницу");
             System.out.println("6. Вывести средние оценки всех студентов");
-            System.out.println("7. Выйти из программы");
+            System.out.println("7. Сохранить данные в файл");
+            System.out.println("8. Искать данные из файла");
+            System.out.println("9. Сортировать студентов по рейтингу");
+            System.out.println("10. Выйти из программы");
 
             int choice = scanner.nextInt();
             switch (choice) {
@@ -39,6 +45,15 @@ public class StudentDictionary {
                     printAllAverageGrades();
                     break;
                 case 7:
+                    saveDataToFile();
+                    break;
+                case 8:
+                    searchFromFile();
+                    break;
+                case 9:
+                    sortStudentsByRating();
+                    break;
+                case 10:
                     running = false;
                     break;
                 default:
@@ -68,6 +83,7 @@ public class StudentDictionary {
 
         Student student = new Student(name, surname, phoneNumber, grades);
         studentMap.put(name, student);
+        student.setRating(student.calculateAverageGrade());
         System.out.println("Студент добавлен.");
     }
 
@@ -110,10 +126,7 @@ public class StudentDictionary {
     }
 
     private static String translateToCyrillic(String latinText) {
-        // Создаем карту для транслитерации с латинского на кириллицу
         Map<String, String> transliterationMap = createTransliterationMap();
-
-        // Переводим каждую букву с латинского на кириллицу
         StringBuilder cyrillicText = new StringBuilder();
         for (int i = 0; i < latinText.length(); i++) {
             char c = latinText.charAt(i);
@@ -124,15 +137,11 @@ public class StudentDictionary {
                 cyrillicText.append(c);
             }
         }
-
         return cyrillicText.toString();
     }
 
     private static String translateToLatin(String russianText) {
-        // Создаем карту для транслитерации с кириллицы на латиницу
         Map<String, String> transliterationMap = createTransliterationMap();
-
-        // Переводим каждую букву с кириллицы на латиницу
         StringBuilder latinText = new StringBuilder();
         for (int i = 0; i < russianText.length(); i++) {
             char c = russianText.charAt(i);
@@ -148,7 +157,6 @@ public class StudentDictionary {
                 latinText.append(c);
             }
         }
-
         return latinText.toString();
     }
 
@@ -167,84 +175,37 @@ public class StudentDictionary {
         }
     }
 
-    private static Map<String, String> createTransliterationMap() {
-        Map<String, String> transliterationMap = new HashMap<>();
-        transliterationMap.put("a", "а");
-        transliterationMap.put("b", "б");
-        transliterationMap.put("v", "в");
-        transliterationMap.put("g", "г");
-        transliterationMap.put("d", "д");
-        transliterationMap.put("e", "Э");
-        transliterationMap.put("yo", "ё");
-        transliterationMap.put("zh", "ж");
-        transliterationMap.put("z", "з");
-        transliterationMap.put("i", "и");
-        transliterationMap.put("y", "й");
-        transliterationMap.put("k", "к");
-        transliterationMap.put("l", "л");
-        transliterationMap.put("m", "м");
-        transliterationMap.put("n", "Н");
-        transliterationMap.put("o", "о");
-        transliterationMap.put("p", "п");
-        transliterationMap.put("r", "р");
-        transliterationMap.put("s", "С");
-        transliterationMap.put("t", "т");
-        transliterationMap.put("u", "у");
-        transliterationMap.put("f", "ф");
-        transliterationMap.put("kh", "х");
-        transliterationMap.put("tc", "ц");
-        transliterationMap.put("ch", "ч");
-        transliterationMap.put("sh", "ш");
-        transliterationMap.put("shch", "щ");
-        transliterationMap.put("y", "ы");
-        transliterationMap.put("iu", "ю");
-        transliterationMap.put("ia", "я");
-        return transliterationMap;
-    }
-}
-
-class Student {
-    private String name;
-    private String surname;
-    private String phoneNumber;
-    private List<Integer> grades;
-
-    public Student(String name, String surname, String phoneNumber, List<Integer> grades) {
-        this.name = name;
-        this.surname = surname;
-        this.phoneNumber = phoneNumber;
-        this.grades = grades;
-    }
-
-    public double calculateAverageGrade() {
-        double sum = 0;
-        for (int grade : grades) {
-            sum += grade;
-        }
-        return sum / grades.size();
-    }
-
-    @Override
-    public String toString() {
-        return "Имя: " + translateToCyrillic(name) +
-                ", Фамилия: " + translateToCyrillic(surname) +
-                ", Номер телефона: " + phoneNumber +
-                ", Оценки: " + grades;
-    }
-
-    private static String translateToCyrillic(String latinText) {
-        Map<String, String> transliterationMap = createTransliterationMap();
-        StringBuilder cyrillicText = new StringBuilder();
-        for (int i = 0; i < latinText.length(); i++) {
-            char c = latinText.charAt(i);
-            String letter = String.valueOf(c).toLowerCase();
-            if (transliterationMap.containsKey(letter)) {
-                cyrillicText.append(transliterationMap.get(letter));
-            } else {
-                cyrillicText.append(c);
+    private static void saveDataToFile() {
+        try {
+            PrintWriter writer = new PrintWriter("student_data.txt");
+            for (Map.Entry<String, Student> entry : studentMap.entrySet()) {
+                writer.println("Студент: " + entry.getKey());
+                writer.println(entry.getValue());
+                writer.println();
             }
+            writer.close();
+            System.out.println("Данные сохранены в файл 'student_data.txt'.");
+        } catch (FileNotFoundException e) {
+            System.out.println("Ошибка при сохранении данных в файл: " + e.getMessage());
         }
-        return cyrillicText.toString();
+    }
+
+    private static void searchFromFile() {
+        System.out.print("Введите имя студента для поиска: ");
+        String searchName = scanner.next();
+        searchDataFromFile(searchName);
+    }
+
+    private static void searchDataFromFile(String searchName) {
+    }
+
+    private static void sortStudentsByRating() {
+        List<Student> students = new ArrayList<>(studentMap.values());
+        Collections.sort(students, Comparator.comparingDouble(Student::getRating).reversed());
+        System.out.println("Студенты отсортированы по рейтингу:");
+        for (Student student : students) {
+            System.out.println(student);
+        }
     }
 
     private static Map<String, String> createTransliterationMap() {
@@ -280,5 +241,60 @@ class Student {
         transliterationMap.put("iu", "ю");
         transliterationMap.put("ia", "я");
         return transliterationMap;
+    }
+}
+
+class Student {
+    private String name;
+    private String surname;
+    private String phoneNumber;
+    private List<Integer> grades;
+    private double rating;
+
+    public Student(String name, String surname, String phoneNumber, List<Integer> grades) {
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
+        this.grades = grades;
+    }
+
+    public double calculateAverageGrade() {
+        double sum = 0;
+        for (int grade : grades) {
+            sum += grade;
+        }
+        return sum / grades.size();
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    @Override
+    public String toString() {
+        return "Имя: " + translateToCyrillic(name) +
+                ", Фамилия: " + translateToCyrillic(surname) +
+                ", Номер телефона: " + phoneNumber +
+                ", Оценки: " + grades +
+                ", Рейтинг: " + rating;
+    }
+
+    private static String translateToCyrillic(String latinText) {
+        Map<Character, String> transliterationMap = createTransliterationMap();
+        StringBuilder cyrillicText = new StringBuilder();
+        for (int i = 0; i < latinText.length(); i++) {
+            char c = latinText.charAt(i);
+            String letter = String.valueOf(c).toLowerCase();
+            if (transliterationMap.containsKey(letter)) {
+                cyrillicText.append(transliterationMap.get(letter));
+            } else {
+                cyrillicText.append(c);
+            }
+        }
+        return cyrillicText.toString();
     }
 }
