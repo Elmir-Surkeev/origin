@@ -95,6 +95,9 @@ public class StudentDictionary {
         if (student != null) {
             System.out.println("Информация о студенте:");
             System.out.println(student);
+            // Добавляем перевод имени на русский и латиницу в вывод
+            System.out.println("Имя на русском: " + translateToCyrillic(name));
+            System.out.println("Имя на латинице: " + translateToLatin(name));
         } else {
             System.out.println("Студент не найден.");
         }
@@ -107,6 +110,9 @@ public class StudentDictionary {
         if (student != null) {
             double average = student.calculateAverageGrade();
             System.out.println("Средняя оценка студента " + translateToCyrillic(name) + ": " + average);
+            // Добавляем перевод имени на русский и латиницу в вывод
+            System.out.println("Имя на русском: " + translateToCyrillic(name));
+            System.out.println("Имя на латинице: " + translateToLatin(name));
         } else {
             System.out.println("Студент не найден.");
         }
@@ -173,6 +179,9 @@ public class StudentDictionary {
             Student student = entry.getValue();
             double average = student.calculateAverageGrade();
             System.out.println("Студент: " + translateToCyrillic(name) + ", Средняя оценка: " + average);
+            // Добавляем перевод имени на русский и латиницу в вывод
+            System.out.println("Имя на русском: " + translateToCyrillic(name));
+            System.out.println("Имя на латинице: " + translateToLatin(name));
         }
     }
 
@@ -200,21 +209,30 @@ public class StudentDictionary {
     private static void searchDataFromFile(String searchName) {
         // Реализация поиска данных из файла
     }
+
+
     private static void sortStudentsByUnRating() {
         List<Student> students = new ArrayList<>(studentMap.values());
         Collections.sort(students, Comparator.comparingDouble(Student::getRating));
-        System.out.println("Студенты отсортированы по убывающемум рейтингу:");
+        System.out.println("Студенты отсортированы по убывающему рейтингу:");
         for (Student student : students) {
             System.out.println(student);
+            // Добавляем перевод имени на русский и латиницу в вывод
+            System.out.println("Имя на русском: " + translateToCyrillic(student.getName()));
+            System.out.println("Имя на латинице: " + translateToLatin(student.getName()));
         }
     }
+
 
     private static void sortStudentsByRating() {
         List<Student> students = new ArrayList<>(studentMap.values());
         Collections.sort(students, Comparator.comparingDouble(Student::getRating).reversed());
-        System.out.println("Студенты отсортированы по возрастающему рейтингу рейтингу:");
+        System.out.println("Студенты отсортированы по возрастающему рейтингу:");
         for (Student student : students) {
             System.out.println(student);
+            // Добавляем перевод имени на русский и латиницу в вывод
+            System.out.println("Имя на русском: " + translateToCyrillic(student.getName()));
+            System.out.println("Имя на латинице: " + translateToLatin(student.getName()));
         }
     }
 
@@ -266,6 +284,9 @@ class Student {
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.grades = grades;
+    }
+    public String getName() {
+        return this.name;
     }
 
     public double calculateAverageGrade() {
