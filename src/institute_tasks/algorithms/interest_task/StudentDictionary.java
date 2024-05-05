@@ -1,9 +1,9 @@
-package institute_tasks.algorithms.third_colloquium;
+package institute_tasks.algorithms.interest_task;
 
 import java.io.*;
 import java.util.*;
 
-import static institute_tasks.algorithms.third_colloquium.AllProgramm.createTransliterationMap;
+import static institute_tasks.algorithms.interest_task.AllProgramm.createTransliterationMap;
 
 public class StudentDictionary {
     private static final Map<String, Student> studentMap = new HashMap<>();
@@ -19,15 +19,16 @@ public class StudentDictionary {
             System.out.println("4. Перевести имя на русский");
             System.out.println("5. Перевести имя на латиницу");
             System.out.println("6. Вывести средние оценки всех студентов");
-            System.out.println("7. Сохранить данные в файл");
+            System.out.println("7. Сортировать студентов по рейтингу (по возрастанию)");
             System.out.println("8. Искать данные из файла");
-            System.out.println("9. Сортировать студентов по рейтингу");
+            System.out.println("9. Сортировать студентов по рейтингу (по убыванию)");
             System.out.println("10. Выйти из программы");
 
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
                     addStudent();
+                    saveDataToFile(); // Сохраняем данные после добавления студента
                     break;
                 case 2:
                     findStudent();
@@ -45,7 +46,7 @@ public class StudentDictionary {
                     printAllAverageGrades();
                     break;
                 case 7:
-                    saveDataToFile();
+                    sortStudentsByUnRating();
                     break;
                 case 8:
                     searchFromFile();
@@ -197,12 +198,21 @@ public class StudentDictionary {
     }
 
     private static void searchDataFromFile(String searchName) {
+        // Реализация поиска данных из файла
+    }
+    private static void sortStudentsByUnRating() {
+        List<Student> students = new ArrayList<>(studentMap.values());
+        Collections.sort(students, Comparator.comparingDouble(Student::getRating));
+        System.out.println("Студенты отсортированы по убывающемум рейтингу:");
+        for (Student student : students) {
+            System.out.println(student);
+        }
     }
 
     private static void sortStudentsByRating() {
         List<Student> students = new ArrayList<>(studentMap.values());
         Collections.sort(students, Comparator.comparingDouble(Student::getRating).reversed());
-        System.out.println("Студенты отсортированы по рейтингу:");
+        System.out.println("Студенты отсортированы по возрастающему рейтингу рейтингу:");
         for (Student student : students) {
             System.out.println(student);
         }
@@ -215,7 +225,7 @@ public class StudentDictionary {
         transliterationMap.put("v", "в");
         transliterationMap.put("g", "г");
         transliterationMap.put("d", "д");
-        transliterationMap.put("e", "е");
+        transliterationMap.put("e", "Э");
         transliterationMap.put("yo", "ё");
         transliterationMap.put("zh", "ж");
         transliterationMap.put("z", "з");
@@ -228,7 +238,7 @@ public class StudentDictionary {
         transliterationMap.put("o", "о");
         transliterationMap.put("p", "п");
         transliterationMap.put("r", "р");
-        transliterationMap.put("s", "с");
+        transliterationMap.put("s", "C");
         transliterationMap.put("t", "т");
         transliterationMap.put("u", "у");
         transliterationMap.put("f", "ф");

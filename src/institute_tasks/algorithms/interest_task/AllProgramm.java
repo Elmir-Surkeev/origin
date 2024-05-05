@@ -1,4 +1,4 @@
-package institute_tasks.algorithms.third_colloquium;
+package institute_tasks.algorithms.interest_task;
 
 import java.util.*;
 
