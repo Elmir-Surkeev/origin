@@ -135,12 +135,12 @@ public class Main {
     private static void loadDefaultHotels(TourismOffer offer, List<TourismFacility> defaultHotels) {
         // В этой функции можно загрузить данные о ранее добавленных отелях из файла или другого источника данных
         // Здесь для примера просто добавляем несколько отелей по умолчанию
-        defaultHotels.add(new TourismFacility("Default Hotel", "City Center", 4.0, 80));
-        defaultHotels.add(new TourismFacility("Beach Hotel", "Beachfront", 4.5, 120));
-        defaultHotels.add(new TourismFacility("Mountain Lodge", "Mountain Area", 4.2, 100));
+        defaultHotels.add(new TourismFacility("Miami", "Osh", 4.0, 80));
+        defaultHotels.add(new TourismFacility("Jannat", "Manasa 64", 4.5, 120));
+        defaultHotels.add(new TourismFacility("Relax", "Bishkek", 4.2, 100));
         // Добавляем эти отели также в предложение
         for (TourismFacility hotel : defaultHotels) {
-            offer.addHotel(hotel.getName(), hotel.getLocation(), hotel.getRating(), hotel.getPrice(), "Admin", "");
+            offer.addHotel(hotel.getName(), hotel.getLocation(), hotel.getRating(), hotel.getPrice(), "Admin", "0312 012 012");
         }
     }
 
