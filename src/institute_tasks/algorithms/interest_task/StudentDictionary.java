@@ -55,6 +55,7 @@ public class StudentDictionary {
                     sortStudentsByRating();
                     break;
                 case 10:
+                    saveDataToFile(); // Сохраняем данные после добавления студента
                     running = false;
                     break;
                 default:
