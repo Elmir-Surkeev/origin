@@ -1,0 +1,26 @@
+Booking process in the hospitality industry.
+    Create a set of offers for clients to choose from various elements of the tourist infrastructure
+    (hotels, family cafes, restaurants, etc.) for optimal selection.
+    Consider the possibility of selecting services, meals, and number of days, as well as location.
+     Implement selection and sorting functionality.
+Create a panel where users can choose to log in as an administrator or as a user.
+Implement standard user registration for both roles with classic error handling.
+The administrator role should include the following functions:
+
+Add hotel, cafe, restaurant (without reviews)
+Delete hotel, cafe, restaurant
+Edit data
+View all existing data
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Standard user registration for regular users (classic errors)
+Upon logging in as a user, the following functionalities should be implemented:
+
+Allow the selection of hotel, restaurant, or cafe
+1.1 Filtering by the following parameters:
+a) Price
+b) Region
+c) Rating (should ask for a range from x to y, with a scroll filter)
+Adding a review for a hotel, cafe, or restaurant
+Add a photo (if unable to display, send via email for viewing)
+Implement filtering to "choose the cheapest in the region"
+(Ensure that users leave a rating using a star selection when leaving a review)
