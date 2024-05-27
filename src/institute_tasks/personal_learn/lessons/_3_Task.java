@@ -1,4 +1,4 @@
-package personal_learn.lessons;
+package institute_tasks.personal_learn.lessons;
 
 //программа вычиляющая факториал числа
 public class _3_Task {

@@ -1,4 +1,4 @@
-package personal_learn.lessons;
+package institute_tasks.personal_learn.lessons;
 
 public class _2_Task {
     public static void main(String[] args) {

@@ -1,6 +1,9 @@
-package institute_tasks._CourseWork;
+package CourseWork;
 
-public class User {
+import java.io.Serializable;
+
+class User implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String username;
     private String password;
     private boolean isAdmin;
@@ -23,4 +26,3 @@ public class User {
         return isAdmin;
     }
 }
-

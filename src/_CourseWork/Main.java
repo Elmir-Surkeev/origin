@@ -1,49 +1,90 @@
-package institute_tasks._CourseWork;
+package _CourseWork;
 
 import java.io.*;
 import java.util.*;
 
 //Booking process in the hospitality industry.
-import java.io.*;
-import java.util.*;
-
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        TourismOffer offer = new TourismOffer("Hotel"); // Creating an offer
-        List<TourismFacility> defaultHotels = new ArrayList<>(); // List to store default hotels
+        TourismOffer offer = new TourismOffer("Hotel"); // Создание предложения
+        List<TourismFacility> defaultHotels = new ArrayList<>(); // Список для хранения стандартных отелей
 
-        loadDefaultHotels(offer, defaultHotels); // Loading default hotels
+        loadDefaultHotels(offer, defaultHotels); // Загрузка стандартных отелей
 
+        System.out.println("Выберите режим работы:");
+        System.out.println("1. гость");
+        System.out.println("2. админ");
+        int mode = scanner.nextInt();
+        scanner.nextLine(); // Считываем символ новой строки
+
+        switch (mode) {
+            case 1:
+                viewMode(offer, defaultHotels, scanner);
+                break;
+            case 2:
+                editMode(offer, defaultHotels, scanner);
+                break;
+            default:
+                System.out.println("Неверный ввод. Повторите попытку.");
+        }
+    }
+
+    private static void viewMode(TourismOffer offer, List<TourismFacility> defaultHotels, Scanner scanner) {
         while (true) {
-            System.out.println("(function for entries from the administrator role) Enter 1 to add a hotel;");
-            System.out.println("(function for entries from the guest role) Enter 2 to find a hotel;");
-            System.out.println("Guest role Enter 3 to write a review about a hotel;");
-            System.out.println("Guest role Enter 4 to display all hotels;");
-            System.out.println("Enter 0 to exit.");
+            System.out.println(" 1 чтобы найти отель;");
+            System.out.println(" 2 чтобы оставить отзыв;");
+            System.out.println(" 3 чтобы просмотреть все отели;");
+            System.out.println(" 0 чтобы выйти.");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline character
+            scanner.nextLine(); // Считываем символ новой строки
 
             switch (choice) {
                 case 1:
-                    addHotel(offer, scanner, defaultHotels); // Passing defaultHotels to add a new hotel to it
-                    break;
-                case 2:
                     findHotel(offer, scanner);
                     break;
-                case 3:
+                case 2:
                     writeReview(offer, scanner);
                     break;
-                case 4:
-                    System.out.println("All hotels:");
+                case 3:
+                    System.out.println("Все отели:");
                     System.out.println(offer.getAllHotelsAsString());
                     break;
                 case 0:
-                    System.out.println("Program terminated.");
-                    saveDataToFile(defaultHotels); // Saving default hotels before exiting
+                    System.out.println("Программа завершена.");
+                    saveDataToFile(defaultHotels); // Сохранение стандартных отелей перед выходом
                     System.exit(0);
                 default:
-                    System.out.println("Invalid input. Please try again.");
+                    System.out.println("Неверный ввод. Повторите попытку.");
+            }
+        }
+    }
+
+    private static void editMode(TourismOffer offer, List<TourismFacility> defaultHotels, Scanner scanner) {
+        while (true) {
+            System.out.println(" 1 чтобы добавить отель;");
+            System.out.println(" 2 чтобы редактировать отель;");
+            System.out.println(" 3 чтобы удалить отель;");
+            System.out.println(" 0 чтобы выйти.");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Считываем символ новой строки
+
+            switch (choice) {
+                case 1:
+                    addHotel(offer, scanner, defaultHotels);
+                    break;
+                case 2:
+                    // Реализовать функцию редактирования отеля
+                    break;
+                case 3:
+                    // Реализовать функцию удаления отеля
+                    break;
+                case 0:
+                    System.out.println("Программа завершена.");
+                    saveDataToFile(defaultHotels); // Сохранение стандартных отелей перед выходом
+                    System.exit(0);
+                default:
+                    System.out.println("Неверный ввод. Повторите попытку.");
             }
         }
     }
