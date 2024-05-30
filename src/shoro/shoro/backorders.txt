@@ -1,0 +1,9 @@
+pe 3
+pepsi 5
+pepsi 12
+pepsi 5
+pepsi 2
+Cola 1
+�� 9
+D 1
+Fanta 2
