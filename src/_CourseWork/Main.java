@@ -3,20 +3,20 @@ package _CourseWork;
 import java.io.*;
 import java.util.*;
 
-// Процесс бронирования в индустрии гостеприимства.
+// Booking process in the hospitality industry.
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        TourismOffer offer = new TourismOffer("Hotel"); // Создание предложения
-        List<TourismFacility> defaultHotels = new ArrayList<>(); // Список для хранения стандартных отелей
+        TourismOffer offer = new TourismOffer("Hotel"); // Creating an offer
+        List<TourismFacility> defaultHotels = new ArrayList<>(); // List to store default hotels
 
-        loadDefaultHotels(offer, defaultHotels); // Загрузка стандартных отелей
+        loadDefaultHotels(offer, defaultHotels); // Loading default hotels
 
-        System.out.println("Выберите режим работы:");
-        System.out.println("1. гость");
-        System.out.println("2. админ");
+        System.out.println("Choose the working mode:");
+        System.out.println("1. Guest");
+        System.out.println("2. Admin");
         int mode = scanner.nextInt();
-        scanner.nextLine(); // Считываем символ новой строки
+        scanner.nextLine(); // Read the newline character
 
         switch (mode) {
             case 1:
@@ -26,19 +26,19 @@ public class Main {
                 editMode(offer, defaultHotels, scanner);
                 break;
             default:
-                System.out.println("Неверный ввод. Повторите попытку.");
+                System.out.println("Invalid input. Please try again.");
         }
     }
 
     private static void viewMode(TourismOffer offer, List<TourismFacility> defaultHotels, Scanner scanner) {
         while (true) {
-            System.out.println("0. Просмотреть лучшие предложения;");
-            System.out.println("1. Найти отель;");
-            System.out.println("2. Оставить отзыв;");
-            System.out.println("3. Просмотреть все отели;");
-            System.out.println("4. Выйти.");
+            System.out.println("0. View the best offers;");
+            System.out.println("1. Find a hotel;");
+            System.out.println("2. Leave a review;");
+            System.out.println("3. View all hotels;");
+            System.out.println("4. Exit.");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Считываем символ новой строки
+            scanner.nextLine(); // Read the newline character
 
             switch (choice) {
                 case 0:
@@ -51,15 +51,15 @@ public class Main {
                     writeReview(offer, scanner);
                     break;
                 case 3:
-                    System.out.println("Все отели:");
+                    System.out.println("All hotels:");
                     printAllHotels(offer);
                     break;
                 case 4:
-                    System.out.println("Программа завершена.");
-                    saveDataToFile(defaultHotels); // Сохранение стандартных отелей перед выходом
+                    System.out.println("Program terminated.");
+                    saveDataToFile(defaultHotels); // Saving default hotels before exiting
                     System.exit(0);
                 default:
-                    System.out.println("Неверный ввод. Повторите попытку.");
+                    System.out.println("Invalid input. Please try again.");
             }
         }
     }
@@ -67,9 +67,9 @@ public class Main {
     private static void viewBestOffers(TourismOffer offer) {
         List<TourismFacility> bestOffers = offer.getBestOffers();
         if (bestOffers.isEmpty()) {
-            System.out.println("Нет лучших предложений на данный момент.");
+            System.out.println("No best offers at the moment.");
         } else {
-            System.out.println("Лучшие предложения:");
+            System.out.println("Best offers:");
             for (TourismFacility hotel : bestOffers) {
                 System.out.println(hotel);
             }
@@ -78,13 +78,13 @@ public class Main {
 
     private static void editMode(TourismOffer offer, List<TourismFacility> defaultHotels, Scanner scanner) {
         while (true) {
-            System.out.println("1. Добавить отель;");
-            System.out.println("2. Редактировать отель;");
-            System.out.println("3. Удалить отель;");
-            System.out.println("4. Просмотреть все отели;");
-            System.out.println("5. Выйти.");
+            System.out.println("1. Add a hotel;");
+            System.out.println("2. Edit a hotel;");
+            System.out.println("3. Remove a hotel;");
+            System.out.println("4. View all hotels;");
+            System.out.println("5. Exit.");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Считываем символ новой строки
+            scanner.nextLine(); // Read the newline character
 
             switch (choice) {
                 case 1:
@@ -100,127 +100,137 @@ public class Main {
                     printAllHotels(offer);
                     break;
                 case 5:
-                    System.out.println("Программа завершена.");
-                    saveDataToFile(defaultHotels); // Сохранение стандартных отелей перед выходом
+                    System.out.println("Program terminated.");
+                    saveDataToFile(defaultHotels); // Saving default hotels before exiting
                     System.exit(0);
                 default:
-                    System.out.println("Неверный ввод. Повторите попытку.");
+                    System.out.println("Invalid input. Please try again.");
             }
         }
     }
 
-    // Функция для добавления отеля
+    // Function to add a hotel
     private static void addHotel(TourismOffer offer, Scanner scanner, List<TourismFacility> defaultHotels) {
-        System.out.print("Введите название отеля: ");
+        System.out.print("Enter the hotel name: ");
         String hotelName = scanner.nextLine();
-        System.out.print("Введите местоположение отеля: ");
+        System.out.print("Enter the hotel location: ");
         String hotelLocation = scanner.nextLine();
-        System.out.print("Введите рейтинг отеля: ");
+        System.out.print("Enter the hotel rating: ");
         double hotelRating = scanner.nextDouble();
-        System.out.print("Введите цену за ночь: ");
+        System.out.print("Enter the price per night: ");
         double hotelPrice = scanner.nextDouble();
-        scanner.nextLine(); // Считываем символ новой строки
-        System.out.print("Введите сторону от солнца: ");
+        scanner.nextLine(); // Read the newline character
+        System.out.print("Enter the sun side: ");
         String sunSide = scanner.nextLine();
-        System.out.print("Есть ли бассейн (true/false): ");
+        System.out.print("Does it have a pool (true/false): ");
         boolean hasPool = scanner.nextBoolean();
-        System.out.print("Есть ли хранение багажа (true/false): ");
+        System.out.print("Does it have luggage storage (true/false): ");
         boolean hasLuggageStorage = scanner.nextBoolean();
-        System.out.print("Есть ли каршеринг (true/false): ");
+        System.out.print("Does it have car sharing (true/false): ");
         boolean hasCarSharing = scanner.nextBoolean();
-        System.out.print("Есть ли детская зона (true/false): ");
+        System.out.print("Does it have a kids zone (true/false): ");
         boolean hasKidsZone = scanner.nextBoolean();
-        scanner.nextLine(); // Считываем символ новой строки
-        System.out.print("Введите имя владельца: ");
+        scanner.nextLine(); // Read the newline character
+        System.out.print("Enter the owner's name: ");
         String userName = scanner.nextLine();
-        System.out.print("Введите телефон администратора: ");
+        System.out.print("Enter the administrator's phone number: ");
         String userPhone = scanner.nextLine();
         offer.addHotel(hotelName, hotelLocation, hotelRating, hotelPrice, sunSide, hasPool, hasLuggageStorage, hasCarSharing, hasKidsZone, userName, userPhone);
-        // Добавление нового отеля в список стандартных отелей
+        // Adding a new hotel to the list of default hotels
         defaultHotels.add(new TourismFacility(offer.getNextId(), hotelName, hotelLocation, hotelRating, hotelPrice, sunSide, hasPool, hasLuggageStorage, hasCarSharing, hasKidsZone));
-        System.out.println("Отель успешно добавлен.");
+        System.out.println("Hotel successfully added.");
     }
 
-    // Функция для поиска отеля
+    // Function to find a hotel
     private static void findHotel(TourismOffer offer, Scanner scanner) {
-        System.out.println("Выберите параметр для поиска отеля:");
-        System.out.println("1. По имени;");
-        System.out.println("2. По региону;");
-        System.out.println("3. По цене;");
-        System.out.println("4. По наличию детской зоны;");
+        System.out.println("Choose the parameter to search for a hotel:");
+        System.out.println("1. By name;");
+        System.out.println("2. By region;");
+        System.out.println("3. By price;");
+        System.out.println("4. By availability of kids zone;");
         int searchOption = scanner.nextInt();
-        scanner.nextLine(); // Считываем символ новой строки
+        scanner.nextLine(); // Read the newline character
 
         switch (searchOption) {
             case 1:
-                System.out.print("Введите имя отеля: ");
+                System.out.print("Enter the hotel name: ");
                 String hotelName = scanner.nextLine().toLowerCase();
                 List<TourismFacility> hotelsByName = offer.findHotelByName(hotelName);
                 printFoundHotels(hotelsByName);
                 break;
             case 2:
-                System.out.print("Введите регион: ");
+                System.out.print("Enter the region: ");
                 String location = scanner.nextLine();
                 List<TourismFacility> foundHotelsByLocation = offer.chooseFacilities(location);
                 printFoundHotels(foundHotelsByLocation);
                 break;
             case 3:
-                System.out.print("Введите максимальную цену: ");
+                System.out.print("Enter the maximum price: ");
                 double maxPrice = scanner.nextDouble();
                 List<TourismFacility> foundHotelsByPrice = offer.findHotelByPrice(maxPrice);
                 printFoundHotels(foundHotelsByPrice);
                 break;
             case 4:
-                System.out.print("Есть ли детская зона (true/false): ");
+                System.out.print("Does it have a kids zone (true/false): ");
                 boolean hasKidsZone = scanner.nextBoolean();
                 List<TourismFacility> foundHotelsByKidsZone = offer.findHotelByKidsZone(hasKidsZone);
                 printFoundHotels(foundHotelsByKidsZone);
                 break;
             default:
-                System.out.println("Неверный ввод.");
+                System.out.println("false enter");
         }
     }
 
-    // Функция для вывода найденных отелей
-    private static void printFoundHotels(List<TourismFacility> hotels) {
-        if (hotels.isEmpty()) {
-            System.out.println("По вашему запросу отели не найдены.");
-        } else {
-            System.out.println("Найденные отели:");
-            for (TourismFacility hotel : hotels) {
-                System.out.println(hotel);
-                if (hotel.getReviews().isEmpty()) {
-                    System.out.println("Отзывы отсутствуют.");
-                } else {
-                    System.out.println("Отзывы:");
-                    for (String review : hotel.getReviews()) {
-                        System.out.println("- " + review);
-                    }
-                }
-            }
-        }
-    }
+   ////////////////////////////////////////// // Функция для вывода найденных отелей
+   private static void printFoundHotels(List<TourismFacility> hotels) {
+       if (hotels.isEmpty()) {
+           System.out.println("No hotels found for your query.");
+       } else {
+           System.out.println("Found hotels:");
+           for (TourismFacility hotel : hotels) {
+               System.out.println(hotel);
+               if (hotel.getReviews().isEmpty()) {
+                   System.out.println("No reviews available.");
+               } else {
+                   System.out.println("Reviews:");
+                   for (String review : hotel.getReviews()) {
+                       System.out.println("- " + review);
+                   }
+               }
+           }
+       }
+   }
 
-    // Функция для написания отзыва об отеле
+    // Function for writing a review about a hotel
     private static void writeReview(TourismOffer offer, Scanner scanner) {
-        System.out.print("Введите название отеля, о котором хотите оставить отзыв: ");
+        System.out.print("Enter the name of the hotel you want to review: ");
         String hotelToReview = scanner.nextLine();
-        System.out.print("Введите ваше имя: ");
+        System.out.print("Enter your name: ");
         String userName = scanner.nextLine();
-        System.out.print("Введите ваш номер телефона: ");
+        System.out.print("Enter your phone number: ");
         String userPhone = scanner.nextLine();
-        System.out.print("Напишите ваш отзыв: ");
+        System.out.print("Write your review: ");
         String review = scanner.nextLine();
         offer.writeReview(hotelToReview, userName, userPhone, review);
     }
 
-    // Функция для загрузки стандартных отелей
+    // Function for loading default hotels
     private static void loadDefaultHotels(TourismOffer offer, List<TourismFacility> defaultHotels) {
         Random rand = new Random();
-        String[] sunSides = {"северная", "южная", "восточная", "западная"};
+        String[] sunSides = {"north", "south", "east", "west"};
         defaultHotels.add(new TourismFacility(1, "ES", "Osh", 4.0, 80, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), true));
         defaultHotels.add(new TourismFacility(2, "Jannat", "Osh", 4.4, 120, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), false));
         defaultHotels.add(new TourismFacility(3, "INAI", "Bishkek", 4.6, 200, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), false));
+        defaultHotels.add(new TourismFacility(5, "Rixos", "Bishkek", 4.5, 180, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), true));
+        defaultHotels.add(new TourismFacility(6, "Hyatt Regency", "Bishkek", 4.7, 220, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), true));
+        defaultHotels.add(new TourismFacility(7, "Plaza", "Bishkek", 4.3, 160, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), false));
+        defaultHotels.add(new TourismFacility(8, "Soluxe", "Bishkek", 4.2, 140, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), false));
+        defaultHotels.add(new TourismFacility(9, "Navat", "Osh", 4.6, 190, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), true));
+        defaultHotels.add(new TourismFacility(10, "Nur", "Osh", 4.3, 150, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), false));
+        defaultHotels.add(new TourismFacility(11, "Sultan", "Jalal-Abad", 4.0, 100, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), false));
+        defaultHotels.add(new TourismFacility(12, "Uluu", "Issyk-Kul", 4.4, 170, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), true));
+        defaultHotels.add(new TourismFacility(13, "Dostuk", "Talas", 4.1, 130, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), false));
+        defaultHotels.add(new TourismFacility(14, "Altyn-Kol", "Naryn", 4.2, 160, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), true));
         defaultHotels.add(new TourismFacility(4, "Relax", "Bishkek", 4.1, 150, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), true));
 
         for (TourismFacility hotel : defaultHotels) {
@@ -228,87 +238,87 @@ public class Main {
         }
     }
 
-    // Функция для редактирования отеля
+    // Function for editing a hotel
     private static void editHotel(TourismOffer offer, Scanner scanner) {
-        System.out.println("Все отели:");
+        System.out.println("All hotels:");
         printAllHotels(offer);
-        System.out.print("Введите номер отеля, который вы хотите редактировать: ");
+        System.out.print("Enter the number of the hotel you want to edit: ");
         int hotelId = scanner.nextInt();
-        scanner.nextLine(); // Считываем символ новой строки
+        scanner.nextLine(); // Consume newline character
         TourismFacility hotel = offer.getHotelById(hotelId);
         if (hotel == null) {
-            System.out.println("Отель с таким номером не найден.");
+            System.out.println("Hotel with this number not found.");
             return;
         }
-        System.out.println("Редактирование отеля: " + hotel.getName());
-        System.out.print("Введите новое название (оставьте пустым для сохранения текущего значения): ");
+        System.out.println("Editing hotel: " + hotel.getName());
+        System.out.print("Enter the new name (leave blank to keep current value): ");
         String newName = scanner.nextLine();
         if (!newName.isEmpty()) {
             hotel.setName(newName);
         }
-        System.out.print("Введите новое местоположение (оставьте пустым для сохранения текущего значения): ");
+        System.out.print("Enter the new location (leave blank to keep current value): ");
         String newLocation = scanner.nextLine();
         if (!newLocation.isEmpty()) {
             hotel.setLocation(newLocation);
         }
-        System.out.print("Введите новый рейтинг (или -1 для сохранения текущего значения): ");
+        System.out.print("Enter the new rating (or -1 to keep current value): ");
         double newRating = scanner.nextDouble();
         if (newRating != -1) {
             hotel.setRating(newRating);
         }
-        System.out.print("Введите новую цену (или -1 для сохранения текущего значения): ");
+        System.out.print("Enter the new price (or -1 to keep current value): ");
         double newPrice = scanner.nextDouble();
         if (newPrice != -1) {
             hotel.setPrice(newPrice);
         }
-        scanner.nextLine(); // Считываем символ новой строки
-        System.out.print("Введите новую сторону от солнца (оставьте пустым для сохранения текущего значения): ");
+        scanner.nextLine(); // Consume newline character
+        System.out.print("Enter the new sun side (leave blank to keep current value): ");
         String newSunSide = scanner.nextLine();
         if (!newSunSide.isEmpty()) {
             hotel.setSunSide(newSunSide);
         }
-        System.out.print("Есть ли бассейн (true/false, или оставьте пустым для сохранения текущего значения): ");
+        System.out.print("Does it have a pool (true/false, or leave blank to keep current value): ");
         String newHasPool = scanner.nextLine();
         if (!newHasPool.isEmpty()) {
             hotel.setHasPool(Boolean.parseBoolean(newHasPool));
         }
-        System.out.print("Есть ли хранение багажа (true/false, или оставьте пустым для сохранения текущего значения): ");
+        System.out.print("Does it have luggage storage (true/false, or leave blank to keep current value): ");
         String newHasLuggageStorage = scanner.nextLine();
         if (!newHasLuggageStorage.isEmpty()) {
             hotel.setHasLuggageStorage(Boolean.parseBoolean(newHasLuggageStorage));
         }
-        System.out.print("Есть ли каршеринг (true/false, или оставьте пустым для сохранения текущего значения): ");
+        System.out.print("Does it have car sharing (true/false, or leave blank to keep current value): ");
         String newHasCarSharing = scanner.nextLine();
         if (!newHasCarSharing.isEmpty()) {
             hotel.setHasCarSharing(Boolean.parseBoolean(newHasCarSharing));
         }
-        System.out.print("Есть ли детская зона (true/false, или оставьте пустым для сохранения текущего значения): ");
+        System.out.print("Does it have a kids zone (true/false, or leave blank to keep current value): ");
         String newHasKidsZone = scanner.nextLine();
         if (!newHasKidsZone.isEmpty()) {
             hotel.setHasKidsZone(Boolean.parseBoolean(newHasKidsZone));
         }
-        System.out.println("Отель успешно отредактирован.");
+        System.out.println("Hotel successfully edited.");
     }
 
-    // Функция для удаления отеля
+    // Function for removing a hotel
     private static void removeHotel(TourismOffer offer, Scanner scanner) {
-        System.out.println("Все отели:");
+        System.out.println("All hotels:");
         printAllHotels(offer);
-        System.out.print("Введите номер отеля, который вы хотите удалить: ");
+        System.out.print("Enter the number of the hotel you want to remove: ");
         int hotelId = scanner.nextInt();
-        scanner.nextLine(); // Считываем символ новой строки
+        scanner.nextLine(); // Consume newline character
         if (offer.removeHotel(hotelId)) {
-            System.out.println("Отель успешно удален.");
+            System.out.println("Hotel successfully removed.");
         } else {
-            System.out.println("Отель с таким номером не найден.");
+            System.out.println("Hotel with this number not found.");
         }
     }
 
-    // Функция для вывода всех отелей
+    // Function for printing all hotels
     private static void printAllHotels(TourismOffer offer) {
         List<TourismFacility> allHotels = offer.getAllFacilities();
         if (allHotels.isEmpty()) {
-            System.out.println("Отели отсутствуют.");
+            System.out.println("No hotels available.");
         } else {
             for (TourismFacility hotel : allHotels) {
                 System.out.println(hotel);
@@ -316,17 +326,15 @@ public class Main {
         }
     }
 
-    // Функция для сохранения данных в файл
+    // Function for saving data to a file
     private static void saveDataToFile(List<TourismFacility> defaultHotels) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("hotels.dat"))) {
             oos.writeObject(defaultHotels);
-            System.out.println("Данные успешно сохранены.");
+            System.out.println("Data successfully saved.");
         } catch (IOException e) {
-            System.out.println("Ошибка при сохранении данных: " + e.getMessage());
+            System.out.println("Error saving data: " + e.getMessage());
         }
     }
-
-    // Класс, представляющий туристическое предложение
     static class TourismOffer {
         private String name;
         private List<TourismFacility> facilities;
@@ -335,7 +343,7 @@ public class Main {
         public TourismOffer(String name) {
             this.name = name;
             this.facilities = new ArrayList<>();
-            this.nextId = 1; // Начинаем с ID 1
+            this.nextId = 1; // Start with ID 1
         }
 
         public void addHotel(String name, String location, double rating, double price, String sunSide, boolean hasPool, boolean hasLuggageStorage, boolean hasCarSharing, boolean hasKidsZone, String userName, String userPhone) {
@@ -386,11 +394,11 @@ public class Main {
             for (TourismFacility facility : facilities) {
                 if (facility.getName().equalsIgnoreCase(hotelName)) {
                     facility.addReview(userName + " (" + userPhone + "): " + review);
-                    System.out.println("Ваш отзыв был успешно добавлен.");
+                    System.out.println("Your review has been successfully added.");
                     return;
                 }
             }
-            System.out.println("Отель с таким именем не найден.");
+            System.out.println("Hotel with this name not found.");
         }
 
         public TourismFacility getHotelById(int id) {
@@ -433,7 +441,7 @@ public class Main {
         }
     }
 
-    // Класс, представляющий туристическое заведение (отель)
+    // Class representing a tourism facility (hotel)
     static class TourismFacility implements Serializable {
         private int id;
         private String name;
@@ -547,7 +555,10 @@ public class Main {
 
         @Override
         public String toString() {
-            return "ID: " + id + ", Имя: " + name + ", Местоположение: " + location + ", Рейтинг: " + rating + ", Цена: " + price + ", Сторона от солнца: " + sunSide + ", Бассейн: " + hasPool + ", Хранение багажа: " + hasLuggageStorage + ", Каршеринг: " + hasCarSharing + ", Детская зона: " + hasKidsZone;
+            return "ID: " + id + ", Name: " + name + ", Location: " + location + ", Rating: " + rating + ", Price: " + price + ", Sun Side: " + sunSide + ", Pool: " + hasPool + ", Luggage Storage: " + hasLuggageStorage + ", Car Sharing: " + hasCarSharing + ", Kids Zone: " + hasKidsZone;
         }
     }
 }
+
+    ////////////////////////////////////////////////////////////////
+    // Класс, представляющий туристическое предложение
