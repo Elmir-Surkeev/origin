@@ -1,5 +1,0 @@
-10.05.2024 Product A 5
-11.05.2024 Product B 3
-11.05.2024 Product C 7
-12.05.2024 Product A 2
-12.05.2024 Product B 4

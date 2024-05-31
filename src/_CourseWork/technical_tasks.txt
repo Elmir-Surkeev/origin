@@ -1,4 +1,4 @@
-Booking process in the hospitality industry.
+_Booking._Booking process in the hospitality industry.
     Create a set of offers for clients to choose from various elements of the tourist infrastructure
     (hotels, family cafes, restaurants, etc.) for optimal selection.
     Consider the possibility of selecting services, meals, and number of days, as well as location.

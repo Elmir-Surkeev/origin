@@ -146,7 +146,7 @@ public class MainApp extends JFrame {
         // Adding default admin
         users.add(new User("admin", "admin123", true));
 
-        setTitle("Hospitality Booking System");
+        setTitle("Hospitality Booking.Booking System");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);

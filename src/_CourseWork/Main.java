@@ -1,9 +1,16 @@
 package _CourseWork;
 
+//import institute_tasks._Course_Work2;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.*;
+import java.util.List;
 
-// Booking process in the hospitality industry.
+// Booking.Booking process in the hospitality industry.
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -29,7 +36,79 @@ public class Main {
                 System.out.println("Invalid input. Please try again.");
         }
     }
-
+//\\
+//    private JPanel createLoginPanel() {
+//        JPanel panel = new JPanel(new GridLayout(3, 2));
+//        JLabel usernameLabel = new JLabel("Username:");
+//        JTextField usernameField = new JTextField();
+//        JLabel passwordLabel = new JLabel("Password:");
+//        JPasswordField passwordField = new JPasswordField();
+//        JButton loginButton = new JButton("Login");
+//        JButton registerButton = new JButton("Register");
+//
+//        panel.add(usernameLabel);
+//        panel.add(usernameField);
+//        panel.add(passwordLabel);
+//        panel.add(passwordField);
+//        panel.add(loginButton);
+//        panel.add(registerButton);
+//
+//        loginButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                String username = usernameField.getText();
+//                String password = new String(passwordField.getPassword());
+//                login(username, password);
+//            }
+//        });
+//
+//        registerButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                String username = usernameField.getText();
+//                String password = new String(passwordField.getPassword());
+//                register(username, password);
+//            }
+//        });
+//
+//        return panel;
+//    }
+//
+//    private void login(String username, String password) {
+//        for (User user : users) {
+//            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+//                loggedInUser = user;
+//                break;
+//            }
+//        }
+//
+//        if (loggedInUser == null) {
+//            JOptionPane.showMessageDialog(this, "Invalid login. Please try again.");
+//            return;
+//        }
+//
+//        if (loggedInUser.isAdmin()) {
+//            JPanel adminPanel = createAdminPanel();
+//            setContentPane(adminPanel);
+//        } else {
+//            JPanel userPanel = createUserPanel();
+//            setContentPane(userPanel);
+//        }
+//        revalidate();
+//    }
+//
+//    private void register(String username, String password) {
+//        for (User user : users) {
+//            if (user.getUsername().equals(username)) {
+//                JOptionPane.showMessageDialog(this, "Username already exists. Please choose another one.");
+//                return;
+//            }
+//        }
+//
+//        users.add(new User(username, password, false));
+//        JOptionPane.showMessageDialog(this, "User registered successfully.");
+//    }
+//    \\
     private static void viewMode(TourismOffer offer, List<TourismFacility> defaultHotels, Scanner scanner) {
         while (true) {
             System.out.println("0. View the best offers;");
@@ -69,7 +148,7 @@ public class Main {
         if (bestOffers.isEmpty()) {
             System.out.println("No best offers at the moment.");
         } else {
-            System.out.println("Best offers:");
+            System.out.println("Best offers this moment:");
             for (TourismFacility hotel : bestOffers) {
                 System.out.println(hotel);
             }
@@ -141,13 +220,15 @@ public class Main {
         System.out.println("Hotel successfully added.");
     }
 
+
+
     // Function to find a hotel
     private static void findHotel(TourismOffer offer, Scanner scanner) {
         System.out.println("Choose the parameter to search for a hotel:");
         System.out.println("1. By name;");
         System.out.println("2. By region;");
         System.out.println("3. By price;");
-        System.out.println("4. By availability of kids zone;");
+        System.out.println("4. By have free an apartments;");
         int searchOption = scanner.nextInt();
         scanner.nextLine(); // Read the newline character
 
@@ -176,6 +257,8 @@ public class Main {
                 List<TourismFacility> foundHotelsByKidsZone = offer.findHotelByKidsZone(hasKidsZone);
                 printFoundHotels(foundHotelsByKidsZone);
                 break;
+
+
             default:
                 System.out.println("false enter");
         }
@@ -225,12 +308,12 @@ public class Main {
         defaultHotels.add(new TourismFacility(6, "Hyatt Regency", "Bishkek", 4.7, 220, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), true));
         defaultHotels.add(new TourismFacility(7, "Plaza", "Bishkek", 4.3, 160, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), false));
         defaultHotels.add(new TourismFacility(8, "Soluxe", "Bishkek", 4.2, 140, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), false));
-        defaultHotels.add(new TourismFacility(9, "Navat", "Osh", 4.6, 190, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), true));
+        defaultHotels.add(new TourismFacility(9, "Navat", "Osh", 2.6, 140, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), true));
         defaultHotels.add(new TourismFacility(10, "Nur", "Osh", 4.3, 150, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), false));
         defaultHotels.add(new TourismFacility(11, "Sultan", "Jalal-Abad", 4.0, 100, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), false));
         defaultHotels.add(new TourismFacility(12, "Uluu", "Issyk-Kul", 4.4, 170, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), true));
         defaultHotels.add(new TourismFacility(13, "Dostuk", "Talas", 4.1, 130, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), false));
-        defaultHotels.add(new TourismFacility(14, "Altyn-Kol", "Naryn", 4.2, 160, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), true));
+        defaultHotels.add(new TourismFacility(14, "Altyn-Kol", "Naryn", 3.2, 160, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), true));
         defaultHotels.add(new TourismFacility(4, "Relax", "Bishkek", 4.1, 150, sunSides[rand.nextInt(sunSides.length)], rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), true));
 
         for (TourismFacility hotel : defaultHotels) {
@@ -292,7 +375,7 @@ public class Main {
         if (!newHasCarSharing.isEmpty()) {
             hotel.setHasCarSharing(Boolean.parseBoolean(newHasCarSharing));
         }
-        System.out.print("Does it have a kids zone (true/false, or leave blank to keep current value): ");
+        System.out.print("Does it have a free an avartments (true/false, or leave blank to keep current value): ");
         String newHasKidsZone = scanner.nextLine();
         if (!newHasKidsZone.isEmpty()) {
             hotel.setHasKidsZone(Boolean.parseBoolean(newHasKidsZone));
@@ -429,7 +512,7 @@ public class Main {
         public List<TourismFacility> getBestOffers() {
             List<TourismFacility> bestOffers = new ArrayList<>();
             for (TourismFacility facility : facilities) {
-                if (facility.getRating() > 4) {
+                if (facility.getRating() > 4.5) {
                     bestOffers.add(facility);
                 }
             }
@@ -555,10 +638,9 @@ public class Main {
 
         @Override
         public String toString() {
-            return "ID: " + id + ", Name: " + name + ", Location: " + location + ", Rating: " + rating + ", Price: " + price + ", Sun Side: " + sunSide + ", Pool: " + hasPool + ", Luggage Storage: " + hasLuggageStorage + ", Car Sharing: " + hasCarSharing + ", Kids Zone: " + hasKidsZone;
+            return "ID: " + id + ", Name: " + name + ", Location: " + location + ", Rating: " + rating + ", Price: " + price + ", Sun Side: " + sunSide + ", Pool: " + hasPool + ", Luggage Storage: " + hasLuggageStorage + ", Car Sharing: " + hasCarSharing + ", FREE PLACES > 3 apartment " + hasKidsZone;
         }
     }
 }
 
     ////////////////////////////////////////////////////////////////
-    // Класс, представляющий туристическое предложение

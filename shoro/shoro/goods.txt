@@ -1,4 +1,0 @@
-Sprite 27
-Schweps 40
-Fanta 18
-Cola 18

@@ -121,7 +121,7 @@ public class BookingSystem {
         Scanner scanner = new Scanner(System.in);
         BookingSystem system = new BookingSystem();
 
-        System.out.println("Welcome to the Booking System!");
+        System.out.println("Welcome to the Booking.Booking System!");
         while (true) {
             System.out.println("1. Register");
             System.out.println("2. Login");
