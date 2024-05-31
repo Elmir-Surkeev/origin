@@ -1,4 +1,5 @@
 package _Booking;
+import java.io.*;
 import java.util.Scanner;
 
 public class RoomManager {
@@ -20,10 +21,10 @@ public class RoomManager {
                     viewAvailableRooms();
                     break;
                 case 2:
-                    planCleaning();
+                    planCleaning(scanner);
                     break;
                 case 3:
-                    manageMaintenance();
+                    manageMaintenance(scanner);
                     break;
                 case 0:
                     return;
@@ -34,17 +35,49 @@ public class RoomManager {
     }
 
     private void viewAvailableRooms() {
-        // Логика просмотра доступных номеров
-        System.out.println("Просмотр доступных номеров...");
+        try (BufferedReader br = new BufferedReader(new FileReader("rooms.txt"))) {
+            String line;
+            System.out.println("Доступные номера:");
+            while ((line = br.readLine()) != null) {
+                if (line.contains("Available")) {
+                    System.out.println(line);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Ошибка при чтении файла: " + e.getMessage());
+        }
     }
 
-    private void planCleaning() {
-        // Логика планирования уборки
-        System.out.println("Планирование уборки...");
+    private void planCleaning(Scanner scanner) {
+        System.out.print("Введите номер комнаты для планирования уборки: ");
+        String room = scanner.nextLine();
+        System.out.print("Введите дату уборки (YYYY-MM-DD): ");
+        String date = scanner.nextLine();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("cleaning_schedule.txt", true))) {
+            bw.write(room + ": " + date);
+            bw.newLine();
+            System.out.println("Уборка запланирована для комнаты " + room + " на " + date);
+        } catch (IOException e) {
+            System.out.println("Ошибка при записи в файл: " + e.getMessage());
+        }
     }
 
-    private void manageMaintenance() {
-        // Логика управления ремонтом и обслуживанием
-        System.out.println("Управление ремонтом и обслуживанием...");
+    private void manageMaintenance(Scanner scanner) {
+        System.out.print("Введите номер комнаты для ремонта/обслуживания: ");
+        String room = scanner.nextLine();
+        System.out.print("Введите описание задачи: ");
+        String task = scanner.nextLine();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("maintenance.txt", true))) {
+            bw.write(room + ": " + task);
+            bw.newLine();
+            System.out.println("Ремонт/обслуживание запланировано для комнаты " + room + ": " + task);
+        } catch (IOException e) {
+            System.out.println("Ошибка при записи в файл: " + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        RoomManager manager = new RoomManager();
+        manager.displayMenu();
     }
 }

@@ -3,19 +3,21 @@ package _Booking;
 import java.util.Date;
 
 public class Booking {
-    private static int nextId = 1;
+    private static int counter = 1;
     private int id;
     private String guestName;
     private Date checkInDate;
     private Date checkOutDate;
     private String roomType;
+    private int roomNumber;
 
-    public Booking(String guestName, Date checkInDate, Date checkOutDate, String roomType) {
-        this.id = nextId++;
+    public Booking(String guestName, Date checkInDate, Date checkOutDate, String roomType, int roomNumber) {
+        this.id = counter++;
         this.guestName = guestName;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.roomType = roomType;
+        this.roomNumber = roomNumber;
     }
 
     public int getId() {
@@ -54,12 +56,23 @@ public class Booking {
         this.roomType = roomType;
     }
 
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
     @Override
     public String toString() {
-        return "Booking ID: " + id +
-                ", Guest Name: " + guestName +
-                ", Check-In Date: " + checkInDate +
-                ", Check-Out Date: " + (checkOutDate != null ? checkOutDate : "Неизвестна") +
-                ", Room Type: " + roomType;
+        return "Booking{" +
+                "id=" + id +
+                ", guestName='" + guestName + '\'' +
+                ", checkInDate=" + checkInDate +
+                ", checkOutDate=" + checkOutDate +
+                ", roomType='" + roomType + '\'' +
+                ", roomNumber=" + roomNumber +
+                '}';
     }
 }

@@ -1,0 +1,3 @@
+Room 101: Available
+Room 102: Occupied
+Room 103: Available
